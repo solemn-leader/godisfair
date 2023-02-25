@@ -5,7 +5,7 @@ COPY poetry.lock poetry.lock
 COPY pyproject.toml pyproject.toml 
 
 RUN python -m pip install --upgrade pip \
-    && python -m install --no-cache-dir poetry==1.1.10 \
+    && python -m pip install --no-cache-dir poetry==1.1.10 \
     && poetry config virtualenvs.create false \
     && poetry config experimental.new-installer false \
     && poetry install --no-interaction --no-dev --no-ansi \

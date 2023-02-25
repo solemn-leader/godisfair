@@ -1,0 +1,10 @@
+version: "3.4"
+
+services:
+  bot:
+    image: solemnleader/godisfair:${IMAGE_TAG}
+    build: .
+    environment: 
+      - SETTINGS_BOT_TOKEN=your_token
+      - SETTINGS_OPENAI_ACCESS_TOKEN=your_token
+      - SETTINGS_OPENAI_PAID=True
