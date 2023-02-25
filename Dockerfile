@@ -11,4 +11,4 @@ RUN python -m pip install --upgrade pip \
     && poetry install --no-interaction --no-dev --no-ansi \
     && rm -rf /tmp/.cache/pypoetry
 
-ENTRYPOINT [ "poetry", "run", "python", "src/run_bot.py" ]
+ENTRYPOINT [ "python", "src/run_bot.py" ]
