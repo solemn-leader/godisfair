@@ -11,6 +11,11 @@ aiogram = "^2.25.1"
 pydantic = "^1.10.5"
 
 [tool.poetry.dev-dependencies]
+flake8 = "^6.0.0"
+pylint = "^2.16.1"
+unify = "^0.5"
+black = "^23.1.0"
+isort = "^5.12.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
