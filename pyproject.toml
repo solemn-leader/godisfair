@@ -2,7 +2,7 @@
 name = "godisfair"
 version = "0.1.0"
 description = ""
-authors = ["d.tsimerman <d.tsimerman@tinkoff.ru>"]
+authors = ["solemn_leader <solemnda@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
