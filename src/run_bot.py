@@ -34,7 +34,6 @@ chatbot = Chatbot(config={
 
 def ask_chatbot_stream(chatbot: Chatbot, prompt: str, sleep: int = 5) -> str:
     try:
-        chatbot.reset_chat()
         return list(chatbot.ask(prompt=prompt))[-1]['message']
     except Exception as e:
         logger.info(f'Could not ask chatbot {e}, sleeping for {sleep} seconds')
