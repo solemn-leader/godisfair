@@ -1,11 +1,11 @@
+import logging
 import time
+
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 from pydantic import BaseSettings
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from revChatGPT.V1 import Chatbot
-import logging
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -25,11 +25,9 @@ settings = Settings()
 bot = Bot(token=settings.bot_token, validate_token=False)
 dp = Dispatcher(bot)
 
-FORGET_COMMAND = '/forget'
+FORGET_COMMAND = 'forget'
 
-chatbot = Chatbot(config={
-    "access_token": settings.openai_access_token, "paid": settings.openai_paid
-})
+chatbot = Chatbot(config={'access_token': settings.openai_access_token, 'paid': settings.openai_paid})
 
 
 def ask_chatbot_stream(chatbot: Chatbot, prompt: str, sleep: int = 5) -> str:
@@ -41,19 +39,13 @@ def ask_chatbot_stream(chatbot: Chatbot, prompt: str, sleep: int = 5) -> str:
         return ask_chatbot_stream(chatbot=chatbot, prompt=prompt, sleep=sleep + 5)
 
 
-forget_button = KeyboardButton(FORGET_COMMAND)
-keyboard = ReplyKeyboardMarkup(
-    resize_keyboard=True, one_time_keyboard=True
-).add(forget_button)
-
-
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
     welcome_message = 'Hi👋'
     await message.answer(welcome_message)
 
 
-@dp.message_handler(commands=[FORGET_COMMAND.lstrip('/')])
+@dp.message_handler(commands=[FORGET_COMMAND])
 async def send_welcome(message: types.Message):
     chatbot.reset_chat()
     logger.info('Starting new chat with user %s', message.from_user.full_name)
@@ -66,7 +58,7 @@ async def respond(message: types.Message):
     logger.info('Got message %s from user %s', text, message.from_user.full_name)
     response = ask_chatbot_stream(chatbot=chatbot, prompt=text)
     logger.info('Responding with %s', response)
-    await message.answer(response, parse_mode='Markdown', reply_markup=keyboard)
+    await message.answer(response, parse_mode='Markdown')
 
 
 if __name__ == '__main__':
